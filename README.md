@@ -50,6 +50,15 @@ This repository contains the analysis of Uber ride data, including visualization
 - **Objective:** Flag unusual rides with abnormally long or short durations.
 - **Method:** Z-score technique to detect extreme values.
 
+  ## 🚖 Uber Routes Map
+
+Below is the map showing the start and stop locations for Uber rides:
+
+![Uber Routes Map](images/uber_routes_map.png)
+
+*The map above visualizes the Uber ride start and stop locations with blue markers for start and red markers for stop points.*
+
+
 ## 💻 How to Run
 
 1. Clone the repository:
