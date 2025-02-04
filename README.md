@@ -54,7 +54,7 @@ This repository contains the analysis of Uber ride data, including visualization
 
 Below is the map showing the start and stop locations for Uber rides:
 
-![Uber Routes Map](images/uber_routes_map.png)
+![Uber Routes Map](uber_routes_map.png.png)
 
 *The map above visualizes the Uber ride start and stop locations with blue markers for start and red markers for stop points.*
 
