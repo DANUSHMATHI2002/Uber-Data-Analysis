@@ -62,6 +62,29 @@ This repository contains the analysis of Uber ride data, including visualization
 3. Run the analysis
    ```bash
    python uber_analysis.py
+### 4. Open the generated maps (uber_routes_map.html and uber_clusters_map.html) in your browser to explore.
+
+## 🔍 Dataset Details
+
+The dataset used contains Uber ride details, including the following columns:
+
+- **START_DATE**: The start date and time of the ride.
+- **END_DATE**: The end date and time of the ride.
+- **START**: The start location of the ride.
+- **STOP**: The stop location of the ride.
+- **MILES**: The distance traveled during the ride (in miles).
+
+  ## 📁 File Structure
+uber-rides-analysis/
+│
+├── uber_analysis.py          # Main Python script for analysis
+├── requirements.txt          # Python package dependencies
+├── uber_routes_map.html      # Map for Uber start/stop locations
+├── uber_clusters_map.html    # Map for clustered Uber locations
+└── README.md                 # Project documentation
+
+
+
 
 
  
