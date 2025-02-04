@@ -1,6 +1,6 @@
-# 🚖 Uber Rides Analysis
+# 🚖 Analyzing and Visualizing Uber Ride Data for Operational Insights
 
-Welcome to the **Uber Rides Analysis** project! 🚗📊 This project explores an Uber dataset to uncover insights related to ride frequency, durations, distances, and popular locations.
+Welcome to the **Analyzing and Visualizing Uber Ride Data for Operational Insights 🚕📊** project! 🚗📊 This project explores an Uber dataset to uncover insights related to ride frequency, durations, distances, and popular locations.
 
 ## 📂 Project Overview
 
