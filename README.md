@@ -75,16 +75,11 @@ The dataset used contains Uber ride details, including the following columns:
 - **MILES**: The distance traveled during the ride (in miles).
 
   ## 📁 File Structure
-uber-rides-analysis/
-│
-├── uber_analysis.py          # Main Python script for analysis
-├── requirements.txt          # Python package dependencies
-├── uber_routes_map.html      # Map for Uber start/stop locations
-├── uber_clusters_map.html    # Map for clustered Uber locations
+├── uber_analysis.py          # Main Python script for analysis  
+├── requirements.txt          # Python package dependencies  
+├── uber_routes_map.html      # Map for Uber start/stop locations  
+├── uber_clusters_map.html    # Map for clustered Uber locations  
 └── README.md                 # Project documentation
-
-
-
 
 
  
