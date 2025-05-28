@@ -57,11 +57,17 @@ def get_random_locations_for_keys(keys):
     # Generate a deterministic random lat/lon for each unique key (START/STOP)
     lats, lons = [], []
     for key in keys:
-        # Use a hash of the key as a seed so the location is stable across reruns
         seed = int(hashlib.sha256(str(key).encode()).hexdigest(), 16) % (10 ** 8)
         rng = np.random.RandomState(seed)
         lats.append(rng.uniform(40.6, 40.8))
         lons.append(rng.uniform(-74.1, -73.9))
+    return lats, lons
+
+@st.cache_data
+def get_cluster_coordinates(n):
+    np.random.seed(42)
+    lats = np.random.uniform(40.5, 40.9, n)
+    lons = np.random.uniform(-74.2, -73.7, n)
     return lats, lons
 
 if option == "Peak Hour Analysis":
@@ -113,9 +119,9 @@ elif option == "Distance vs. Duration":
     st.pyplot(fig)
 
 elif option == "Clustering":
-    np.random.seed(42)
-    dataset['lat'] = np.random.uniform(40.5, 40.9, dataset.shape[0])
-    dataset['lon'] = np.random.uniform(-74.2, -73.7, dataset.shape[0])
+    lats, lons = get_cluster_coordinates(dataset.shape[0])
+    dataset['lat'] = lats
+    dataset['lon'] = lons
     kmeans = KMeans(n_clusters=5, random_state=42)
     dataset['cluster'] = kmeans.fit_predict(dataset[['lat', 'lon']])
     map_clusters = folium.Map(location=[40.7128, -74.0060], zoom_start=11)
