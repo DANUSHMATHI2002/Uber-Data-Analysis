@@ -51,6 +51,12 @@ option = st.sidebar.selectbox(
     )
 )
 
+@st.cache_data
+def get_random_locations(n):
+    lats = np.random.uniform(40.6, 40.8, n)
+    lons = np.random.uniform(-74.1, -73.9, n)
+    return lats, lons
+
 if option == "Peak Hour Analysis":
     fig, ax = plt.subplots(figsize=(10, 5))
     sns.countplot(x=dataset['time'], color='purple', ax=ax)
@@ -64,15 +70,19 @@ elif option == "Route Mapping":
     start_locations = dataset[['START', 'MILES']].drop_duplicates().head(100)
     stop_locations = dataset[['STOP', 'MILES']].drop_duplicates().head(100)
     map_ = folium.Map(location=[40.7128, -74.0060], zoom_start=10)
-    for _, row in start_locations.iterrows():
+    n_start = len(start_locations)
+    n_stop = len(stop_locations)
+    start_lats, start_lons = get_random_locations(n_start)
+    stop_lats, stop_lons = get_random_locations(n_stop)
+    for i, (_, row) in enumerate(start_locations.iterrows()):
         folium.Marker(
-            location=[np.random.uniform(40.6, 40.8), np.random.uniform(-74.1, -73.9)],
+            location=[start_lats[i], start_lons[i]],
             popup=f"Start: {row['START']}\nMiles: {row['MILES']}",
             icon=folium.Icon(color='blue', icon='cloud')
         ).add_to(map_)
-    for _, row in stop_locations.iterrows():
+    for i, (_, row) in enumerate(stop_locations.iterrows()):
         folium.Marker(
-            location=[np.random.uniform(40.6, 40.8), np.random.uniform(-74.1, -73.9)],
+            location=[stop_lats[i], stop_lons[i]],
             popup=f"Stop: {row['STOP']}\nMiles: {row['MILES']}",
             icon=folium.Icon(color='red', icon='cloud')
         ).add_to(map_)
