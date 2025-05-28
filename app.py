@@ -7,7 +7,6 @@ import folium
 from streamlit_folium import st_folium
 from sklearn.cluster import KMeans
 from scipy.stats import zscore
-import hashlib
 
 st.title("Uber Data Analysis Dashboard")
 
@@ -53,15 +52,9 @@ option = st.sidebar.selectbox(
 )
 
 @st.cache_data
-def get_random_locations_for_keys(keys):
-    # Generate a deterministic random lat/lon for each unique key (START/STOP)
-    lats, lons = [], []
-    for key in keys:
-        # Use a hash of the key as a seed so the location is stable across reruns
-        seed = int(hashlib.sha256(str(key).encode()).hexdigest(), 16) % (10 ** 8)
-        rng = np.random.RandomState(seed)
-        lats.append(rng.uniform(40.6, 40.8))
-        lons.append(rng.uniform(-74.1, -73.9))
+def get_random_locations(n):
+    lats = np.random.uniform(40.6, 40.8, n)
+    lons = np.random.uniform(-74.1, -73.9, n)
     return lats, lons
 
 if option == "Peak Hour Analysis":
@@ -73,15 +66,14 @@ if option == "Peak Hour Analysis":
     st.pyplot(fig)
 
 elif option == "Route Mapping":
-    st.info("Showing up to 100 unique start and stop locations for visualization.")
+    st.info("Showing up to 100 random start and stop locations for visualization.")
     start_locations = dataset[['START', 'MILES']].drop_duplicates().head(100)
     stop_locations = dataset[['STOP', 'MILES']].drop_duplicates().head(100)
     map_ = folium.Map(location=[40.7128, -74.0060], zoom_start=10)
-
-    # Get stable random locations for each unique START and STOP
-    start_lats, start_lons = get_random_locations_for_keys(start_locations['START'])
-    stop_lats, stop_lons = get_random_locations_for_keys(stop_locations['STOP'])
-
+    n_start = len(start_locations)
+    n_stop = len(stop_locations)
+    start_lats, start_lons = get_random_locations(n_start)
+    stop_lats, stop_lons = get_random_locations(n_stop)
     for i, (_, row) in enumerate(start_locations.iterrows()):
         folium.Marker(
             location=[start_lats[i], start_lons[i]],
